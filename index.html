@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazr Quran Center</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            font-family: system-ui, sans-serif;
+        }
+        #content-wrapper {
+            width: 100%;
+            height: 100%;
+        }
+        /* Hides it immediately via CSS while JavaScript deletes it */
+        .base44-watermark, 
+        [class*="watermark"], 
+        a[href*="base44.app"],
+        div[style*="z-index: 9999"] {
+            display: none !important;
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="content-wrapper">Loading secure interface...</div>
+
+    <script>
+        const targetUrl = 'https://nazr-quran-center.base44.app/';
+        // Alternate reliable proxy link
+        const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(targetUrl);
+
+        // Function to surgically remove the banner whenever it pops up
+        function removeWatermark(targetNode) {
+            const badges = targetNode.querySelectorAll('.base44-watermark, [class*="watermark"], a[href*="base44.app"]');
+            badges.forEach(badge => badge.remove());
+        }
+
+        fetch(proxyUrl)
+            .then(response => {
+                if (response.ok) return response.json();
+                throw new Error('Network error.');
+            })
+            .then(data => {
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data.contents, 'text/html');
+
+                // Initial cleanup
+                removeWatermark(doc);
+
+                // Fix absolute pathing for asset delivery
+                const baseElement = doc.createElement('base');
+                baseElement.href = targetUrl;
+                doc.head.insertBefore(baseElement, doc.head.firstChild);
+
+                // Inject page content
+                const wrapper = document.getElementById('content-wrapper');
+                wrapper.innerHTML = doc.documentElement.innerHTML;
+
+                // --- THE FIX FOR DYNAMIC PAGES ---
+                // Setup a listener that watches for any layout changes (like clicking Contacts)
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.addedNodes.length) {
+                            removeWatermark(wrapper);
+                        }
+                    });
+                });
+
+                // Start monitoring the entire injected page structure
+                observer.observe(wrapper, { childList: true, subtree: true });
+            })
+            .catch(err => {
+                console.error(err);
+                document.getElementById('content-wrapper').innerHTML = 
+                    `<p style="padding:20px; text-align:center; color:#666;">
+                        Connection timeout. Please refresh the page to retry.
+                     </p>`;
+            });
+    </script>
+</body>
+</html>
