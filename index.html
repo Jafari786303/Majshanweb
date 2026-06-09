@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nazr Quran Center</title>
     <style>
-        /* Reset margins and make the wrapper fill the entire screen */
         * {
             box-sizing: border-box;
         }
@@ -18,56 +17,37 @@
             background-color: #ffffff;
         }
 
-        /* Container that holds the website view */
         .window-container {
             width: 100%;
             height: 100%;
             position: relative;
         }
 
-        /* The embedded website view */
         iframe {
             width: 100%;
             height: 100%;
             border: none;
+        }
+
+        /* This visually covers up the bottom right corner where the Base44 badge sits */
+        .banner-shield {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 180px; /* Adjust width to perfectly match the badge size */
+            height: 90px;  /* Adjust height to perfectly match the badge size */
+            background-color: #ffffff; /* Change this to match the website's background color */
+            z-index: 99999;
+            pointer-events: auto; /* Blocks clicks from hitting the badge underneath */
         }
     </style>
 </head>
 <body>
 
     <div class="window-container">
-        <iframe id="target-web" src="https://nazr-quran-center.base44.app/"></iframe>
+        <iframe src="https://nazr-quran-center.base44.app/"></iframe>
+        <div class="banner-shield"></div>
     </div>
 
-    <script>
-        const iframe = document.getElementById('target-web');
-        
-        // Code executes automatically once the website finishes loading inside the frame
-        iframe.onload = function() {
-            try {
-                const innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-                
-                // Create a style element to inject into the loaded website
-                const customStyle = innerDoc.createElement('style');
-                customStyle.innerHTML = `
-                    /* Targeted selectors to target and remove base44 watermark banners */
-                    .base44-watermark, 
-                    [class*="watermark"], 
-                    [id*="banner"],
-                    div[style*="z-index: 9999"] { 
-                        display: none !important; 
-                        visibility: hidden !important;
-                        opacity: 0 !important;
-                        pointer-events: none !important;
-                    }
-                `;
-                innerDoc.head.appendChild(customStyle);
-            } catch (error) {
-                console.warn(
-                    "Note: Browser security restrictions (CORS) may block cross-site code injection depending on your browser settings."
-                );
-            }
-        };
-    </script>
 </body>
 </html>
