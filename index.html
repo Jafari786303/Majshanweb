@@ -13,40 +13,38 @@
             padding: 0;
             height: 100%;
             width: 100%;
-            overflow: hidden;
+            overflow: hidden; /* Prevent scrolling on the main wrapper */
             background-color: #ffffff;
         }
 
-        .window-container {
+        /* The viewport mask container acts like a frame. 
+           Anything pushed past its edges disappears completely.
+        */
+        .viewport-mask {
             width: 100%;
             height: 100%;
             position: relative;
+            overflow: hidden; 
         }
 
+        /* We scale the iframe out slightly on the right and bottom edges.
+           This pushes the floating watermark off-screen while keeping 
+           the main website content fully visible and completely interactive.
+        */
         iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* This visually covers up the bottom right corner where the Base44 badge sits */
-        .banner-shield {
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 180px; /* Adjust width to perfectly match the badge size */
-            height: 90px;  /* Adjust height to perfectly match the badge size */
-            background-color: #ffffff; /* Change this to match the website's background color */
-            z-index: 99999;
-            pointer-events: auto; /* Blocks clicks from hitting the badge underneath */
+            top: 0;
+            left: 0;
+            width: calc(100% + 95px);  /* Pushes right side out */
+            height: calc(100% + 55px); /* Pushes bottom side out */
+            border: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="window-container">
+    <div class="viewport-mask">
         <iframe src="https://nazr-quran-center.base44.app/"></iframe>
-        <div class="banner-shield"></div>
     </div>
 
 </body>
