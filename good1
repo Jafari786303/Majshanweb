@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazr Quran Center</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden; /* Prevent scrolling on the main wrapper */
+            background-color: #ffffff;
+        }
+
+        /* The viewport mask container acts like a frame. 
+           Anything pushed past its edges disappears completely.
+        */
+        .viewport-mask {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden; 
+        }
+
+        /* We scale the iframe out slightly on the right and bottom edges.
+           This pushes the floating watermark off-screen while keeping 
+           the main website content fully visible and completely interactive.
+        */
+        iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: calc(100% + 95px);  /* Pushes right side out */
+            height: calc(100% + 55px); /* Pushes bottom side out */
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="viewport-mask">
+        <iframe src="https://nazr-quran-center.base44.app/"></iframe>
+    </div>
+
+</body>
+</html>
