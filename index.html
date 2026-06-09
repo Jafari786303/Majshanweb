@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nazr Quran Center - Online Quran & Tajweed Academy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* CSS Reset & Variables */
+        :root {
+            --primary: #0A5C36;
+            --primary-dark: #053b21;
+            --secondary: #D4AF37;
+            --bg-light: #F9FDFB;
+            --text-dark: #2C3E35;
+            --text-light: #6A7E74;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.8rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary);
+        }
+
+        .cta-btn {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 0.6rem 1.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(10, 92, 54, 0.95), rgba(5, 59, 33, 0.95)), url('https://images.unsplash.com/photo-1609599006353-e629f1d41142?q=80&w=1200') no-repeat center center/cover;
+            color: var(--white);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero-arabic {
+            font-family: 'Amiri', serif;
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Courses/Tabs Section */
+        .courses-section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-family: 'Amiri', serif;
+        }
+
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 1rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: var(--primary);
+            border-bottom: 3px solid var(--secondary);
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        @media (max-width: 768px) {
+            .tab-content.active {
+                grid-template-columns: 1fr;
+            }
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .course-details h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .course-features {
+            list-style-type: none;
+            margin: 1.5rem 0;
+        }
+
+        .course-features li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .course-features li::before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+        }
+
+        .course-img img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Booking / Contact Form */
+        .booking-section {
+            background-color: #F0F7F4;
+            padding: 5rem 2rem;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #CBD5E1;
+            border-radius: 6px;
+            font-family: inherit;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: 2px solid var(--primary);
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo-area">
+                <span class="logo-text">Nazr Quran Center</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#courses">Our Courses</a></li>
+                    <li><a href="#register">Admissions</a></li>
+                </ul>
+            </nav>
+            <a href="#register" class="cta-btn">Book Free Trial</a>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <h1>Learn the Holy Quran with Authentic Tajweed</h1>
+            <p>Welcome to Nazr Quran Center. We offer structured online Quran learning programs for children and adults under the direct guidance of experienced and certified Islamic tutors.</p>
+            <a href="#courses" class="cta-btn" style="background-color: var(--secondary); color: var(--text-dark);">Explore Programs</a>
+        </div>
+    </section>
+
+    <section class="courses-section" id="courses">
+        <div class="section-title">
+            <h2>Our Structured Programs</h2>
+            <p>Choose a pathway tailored to your learning level</p>
+        </div>
+
+        <div class="tab-nav">
+            <button class="tab-btn active" onclick="switchTab(event, 'nazra')">Nazra Quran</button>
+            <button class="tab-btn" onclick="switchTab(event, 'tajweed')">Tajweed Rules</button>
+            <button class="tab-btn" onclick="switchTab(event, 'memorization')">Hifz (Memorization)</button>
+        </div>
+
+        <div id="nazra" class="tab-content active">
+            <div class="course-details">
+                <h3>Nazra Quran Reading</h3>
+                <p>Designed specifically for beginners and children to construct a baseline capability for looking and reading the script accurately.</p>
+                <ul class="course-features">
+                    <li>Basic Noorani Qaida introduction</li>
+                    <li>Proper Arabic pronunciation (Makharij)</li>
+                    <li>Step-by-step fluid verse reading</li>
+                    <li>Basic Islamic etiquettes and daily Duas</li>
+                </ul>
+                <a href="#register" class="cta-btn">Enroll Today</a>
+            </div>
+            <div class="course-img">
+                <img src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=600" alt="Quran Reading Program">
+            </div>
+        </div>
+
+        <div id="tajweed" class="tab-content">
+            <div class="course-details">
+                <h3>Tajweed ul-Quran</h3>
+                <p>Perfect your recitation by grasping rules governed by traditional scholars. Focuses heavily on articulation and rhythmic rules.</p>
+                <ul class="course-features">
+                    <li>Advanced rules of Noon and Meem Sakinah</li>
+                    <li>Lengthening parameters (Madd rules)</li>
+                    <li>Practical application in daily prayers</li>
+                    <li>One-on-one custom corrective feedback</li>
+                </ul>
+                <a href="#register" class="cta-btn">Enroll Today</a>
+            </div>
+            <div class="course-img">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?q=80&w=600" alt="Tajweed Lessons">
+            </div>
+        </div>
+
+        <div id="memorization" class="tab-content">
+            <div class="course-details">
+                <h3>Hifz ul-Quran</h3>
+                <p>An organized program meant to assist students looking to commit parts or the entirety of the Holy Quran to memory through structured repetition tracking.</p>
+                <ul class="course-features">
+                    <li>Personalized custom memorization maps</li>
+                    <li>Daily revision schedules (Sabaq, Sabqi, Manzil)</li>
+                    <li>Direct access to certified Huffaz tutors</li>
+                    <li>Flexible schedules tailored to schooling hours</li>
+                </ul>
+                <a href="#register" class="cta-btn">Enroll Today</a>
+            </div>
+            <div class="course-img">
+                <img src="https://images.unsplash.com/photo-1609599006353-e629f1d41142?q=80&w=600" alt="Quran Memorization">
+            </div>
+        </div>
+    </section>
+
+    <section class="booking-section" id="register">
+        <div class="form-container">
+            <h2 style="text-align:center; color: var(--primary); margin-bottom: 2rem;">Book a Free 3-Day Trial Class</h2>
+            <form id="trialForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="Enter student or parent name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" required placeholder="Enter your email address">
+                </div>
+                <div class="form-group">
+                    <label for="course">Select Course</label>
+                    <select id="course" required>
+                        <option value="">Choose a Program...</option>
+                        <option value="nazra">Nazra Quran Reading</option>
+                        <option value="tajweed">Tajweed ul-Quran Rules</option>
+                        <option value="hifz">Hifz ul-Quran (Memorization)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Additional Requirements / Preferred Timings</label>
+                    <textarea id="notes" rows="4" placeholder="Share any specific requirements or preferred times slots..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Nazr Quran Center. All Rights Reserved. Dedicated to authentic Islamic learning.</p>
+    </footer>
+
+    <script>
+        // Tab switching function
+        function switchTab(evt, tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Form submission logic
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert("Thank you! Your trial request has been submitted successfully. Our team will contact you shortly to confirm timings.");
+            document.getElementById("trialForm").reset();
+        }
+    </script>
+</body>
+</html>
